@@ -36,7 +36,7 @@ class Menu:
             login_div = Frame(frame, pady=10)
             details = Label(login_div, text = "Please input an email if you would like an email to be sent when we detect an Evil Twin.", font=("Lucida Sans", 10), pady=3)
             more_details = Label(login_div, text = "If you don't want to receive an email, leave blank.", font = ("Lucida Sans", 10), pady=3)
-            email_label = Label(login_div, text="Email:",font=('Lucida Sans', 16), pady=3)
+            email_label = Label(login_div, text="Please input an email that we will send the warning to:",font=('Lucida Sans', 16), pady=3)
             target_label = Label(login_div, text="Please input the SSID we should scan on:", font=("Lucida Sans", 16), pady=3)
             timer_details = Label(login_div, text = "Please input how often the a scan should occur (in seconds).", font=("Lucida Sans", 10), pady=3)
             begin_button = Button(frame, text="Start Scanning", font=("Lucida Sans", 16), bg='#d6d6d6', activebackground='#d6d6d6', pady=(10), command= lambda: Menu.start_scanner(window, email.get(), timer.get(), target.get()))

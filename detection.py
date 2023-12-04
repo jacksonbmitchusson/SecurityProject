@@ -4,7 +4,7 @@ import subprocess
 import time 
 
 subject = 'Evil Twin Network Detected!'
-app_pass = "password123$"
+app_pass = "lpum zhng bqln byov"
 gmail = "csdetector@gmail.com"
 
 def get_wifi_networks():
@@ -46,17 +46,18 @@ def hamming_dist(s1, s2):
             min_dist = min(min_dist, hamming_dist(s1, new_s2))
     return min_dist
 
-def generate_email_msg(gmail, recipient, subject, body):
+def generate_email_msg(gmail, recipient, subject, body): #NEED TO FIX
     msg = email.message.EmailMessage()
     msg.set_content(body)
     msg['Subject'] = subject
     msg['From'] = gmail
     msg['To'] = recipient
+    return msg
  
-
-def send_email_alert(google_email, app_password, msg):
+def send_email_alert(google_email, app_password, msg): #NEED TO FIX
     s = smtplib.SMTP_SSL('smtp.gmail.com', 465)
     s.login(google_email, app_password)
+    print(msg)
     s.send_message(msg)
     s.quit()
 
@@ -84,6 +85,7 @@ def monitor_networks(target, recipient, hamming_dist_threshold=5, char_equivs=[]
             print(f"Evil Twin detected!!!\nSSID: {ssid}\nSending alert email to {recipient} from {gmail}")
 
             if recipient != "": #if email is blank, user opted to not send email
+                print(f"Gmail = {gmail} \n Password = {app_pass}")
                 msg = generate_email_msg(gmail, recipient, subject, body)
                 send_email_alert(gmail, app_pass, msg)
     
