@@ -63,15 +63,18 @@ class Menu:
 
     def startPB(window, progressbar, email, target, delay):
         time.sleep(1)
-        while True:
-            progressbar['value'] += 1
-            time.sleep(1)
-            if progressbar['value'] == delay:
-                if not detection.monitor_networks(target, email, delaytime=delay): #If monitor_networks returns false, then an evil twin is found and an email has been sent
-                    #Once monitor_networks detects a network, it automatically generates an email, create an alert window now
-                    Menu.alert(window, email)
-                progressbar['value'] = 0
+        try:
+            while True:
+                progressbar['value'] += 1
                 time.sleep(1)
+                if progressbar['value'] == delay:
+                    if not detection.monitor_networks(target, email, delaytime=delay): #If monitor_networks returns false, then an evil twin is found and an email has been sent
+                        #Once monitor_networks detects a network, it automatically generates an email, create an alert window now
+                        Menu.alert(window, email)
+                    progressbar['value'] = 0
+                    time.sleep(1)
+        except Exception as e:
+            print("Closing thread")
                 
     def alert(window, email):
         try:
@@ -83,7 +86,7 @@ class Menu:
             frame = Frame(window, pady=20, padx=20)
             title = Label(frame, text="Evil-Twin detected!", font=("Lucida Sans", 24), pady=5, padx=100)
             text = Label(frame, text="The scanner has detected an evil-twin of the target network SSID you supplied.", font=("Lucida Sans", 10), pady=3)
-            text2 = Label(frame, text="If you supplied an email, we have sent an alert there too. If not, you may check command prompt for additional information.", font=("Lucida Sans", 10), pady=3)
+            text2 = Label(frame, text="If you supplied an email, we have sent an alert there too. You may want to check your spam folder, and trust our gmail: CSDetector", font=("Lucida Sans", 10), pady=3)
             text3 = Label(frame, text="Thank you for using our scanner!", font=("Lucida Sans", 10), pady=3)
             exit_button = Button(frame, text="Close Program", font=('Lucida Sans', 16), bg='#d6d6d6', activebackground='#d6d6d6', pady=(10), command= lambda: Menu.exit(window))
 
