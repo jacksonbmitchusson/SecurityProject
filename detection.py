@@ -87,6 +87,6 @@ def monitor_networks(target, recipient, hamming_dist_threshold=5, char_equivs=[]
                 msg = generate_email_msg(gmail, recipient, subject, body)
                 send_email_alert(gmail, app_pass, msg)
     
-            return False
+            return False #If returned false, reports an evil twin is found
 
-    return True
+    return True #If returned true, no evil twin is found
