@@ -81,7 +81,7 @@ def monitor_networks(target, recipient, hamming_dist_threshold=5, char_equivs=[]
     for ssid in ssids:
         if compare_networks(target, ssid, char_equivs) < hamming_dist_threshold: #send email alert
             detected_ssids.append(ssid)
-            body = f'An evil twin network has been detected! The SSID of the network is {ssid}\nNavigate to [url] to see further details and available actions.'
+            body = f'An evil twin network has been detected! The SSID of the network is {ssid}.'
             print(f"Evil Twin detected!!!\nSSID: {ssid}\nSending alert email to {recipient} from {gmail}")
 
             if recipient != "": #if email is blank, user opted to not send email
